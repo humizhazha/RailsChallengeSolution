@@ -1,36 +1,43 @@
 require 'csv'
+
 class PageController < ApplicationController
+  PAGE_NUM = 10.freeze
+
   def home
-    @person = Person.order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
+    @person = Person.order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: PAGE_NUM)
     sort_and_filter
   end
 
   def sort_and_filter
-    @person = @person.where("first_name LIKE ?", "%#{params[:search]}%") if params[:search].present?
-    @person = @person.order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
+    @person = @person.where(
+        Person.column_names
+            .map {|field| "#{field} like '%#{params[:search]}%'" }
+            .join(' OR ')
+    )if params[:search].present?
+   @person = @person.order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: PAGE_NUM)
   end
 
-  def createLocation(name,person)
+  def createLocation(name, person)
     @location = Location.new
     @location.attributes = {name: name, person: person}
     if @location.save
       @location
     else
-      flash[:notice] = "Error in saving location "+name
+      redirect_to root_path, alert: "Error in saving location " + name
     end
   end
 
-  def createAffiliation(name,person)
+  def createAffiliation(name, person)
     @affiliation = Affiliation.new
     @affiliation.attributes = {name: name, person: person}
     if @affiliation.save
       @affiliation
     else
-      flash[:notice] = "Error in saving affiliation "+name
+      redirect_to root_path, alert: "Error in saving affiliation " + name
     end
   end
 
-  def createPeople(first_name,last_name,gender,species,weapon,vehicle)
+  def createPeople(first_name, last_name, gender, species, weapon, vehicle)
     @people = Person.new
     @people.first_name = first_name
     @people.last_name = last_name
@@ -41,7 +48,7 @@ class PageController < ApplicationController
     if @people.save
       @people
     else
-      flash[:notice] = "Error in saving person "+first_name
+      redirect_to root_path, alert: "Error in saving user " + first_name
     end
   end
 
@@ -54,12 +61,12 @@ class PageController < ApplicationController
         if !row["Affiliations"].present?
           next
         end
-        full_name = row["Name"].split(' ',2)
+        full_name = row["Name"].split(' ', 2)
         first_name = full_name[0]
         last_name = full_name[1]
-        @person = createPeople(first_name,last_name,row["Gender"],row["Species"],row["Weapon"],row["Vehicle"])
-        @location = createLocation(row["Location"],@person)
-        @affiliation = createAffiliation(row["Affiliations"],@person)
+        @person = createPeople(first_name, last_name, row["Gender"], row["Species"], row["Weapon"], row["Vehicle"])
+        @location = createLocation(row["Location"], @person)
+        @affiliation = createAffiliation(row["Affiliations"], @person)
       end
       redirect_to root_path, notice: "Successfully import file to database!"
 
