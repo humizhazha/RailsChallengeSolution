@@ -25,7 +25,8 @@
       <%= f.label :gender %>
     </div>
     <div class="col-sm-8">
-      <%= f.text_field :gender, class: "form-control", placeholder: "Enter gender" %>
+      <%= f.select :gender, options_for_select(@gender_list) %>
+      <%#= f.text_field :gender, class: "form-control", placeholder: "Enter gender" %>
     </div>
   </div>
 
