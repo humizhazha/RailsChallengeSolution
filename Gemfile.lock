@@ -148,6 +148,10 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    rspec (3.10.0)
+      rspec-core (~> 3.10.0)
+      rspec-expectations (~> 3.10.0)
+      rspec-mocks (~> 3.10.0)
     rspec-core (3.10.0)
       rspec-support (~> 3.10.0)
     rspec-expectations (3.10.0)
@@ -231,6 +235,7 @@ DEPENDENCIES
   prawn
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.4)
+  rspec
   rspec-rails
   sass-rails (>= 6)
   spring

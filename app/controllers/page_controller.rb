@@ -15,11 +15,11 @@ class PageController < ApplicationController
         full_name = row["Name"].split(' ', 2)
         first_name = full_name[0]
         last_name = full_name[1]
-        @person = createPeople(first_name, last_name, row["Gender"], row["Species"], row["Weapon"], row["Vehicle"])
+        @person = PeopleImport.createPeople(first_name, last_name, row["Gender"], row["Species"], row["Weapon"], row["Vehicle"])
         @person.save
-        @location = createLocation(row["Location"], @person)
+        @location = PeopleImport.createLocation(row["Location"], @person)
         @location.save
-        @affiliation = createAffiliation(row["Affiliations"], @person)
+        @affiliation = PeopleImport.createAffiliation(row["Affiliations"], @person)
         @affiliation.save
       end
       redirect_to people_path, notice: "Successfully import file to database!"
