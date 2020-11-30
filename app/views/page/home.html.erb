@@ -14,44 +14,44 @@
       </div>
     <% end %>
   </div>
-  <div class="col-md-12">
-    <form class="search">
-      <input type="text" name="search" id="search" placeholder="Search..." autofocus="autofocus">
-    </form>
-    <div class="flickr_pagination">
-      <%= will_paginate @person, :container => false %>
-    </div>
-    <table class="table">
-      <thead>
-       <tr>
-         <th><%= sortable "first_name" %></th>
-         <th><%= sortable "last_name" %></th>
-         <th><%= sortable "gender" %></th>
-         <th><%= sortable "weapon" %></th>
-         <th><%= sortable "vehicle" %></th>
-         <th><%= sortable "species" %></th>
-       </tr>
-      </thead>
-      <tbody>
+<!--  <div class="col-md-12">-->
+<!--    <form class="search">-->
+<!--      <input type="text" name="search" id="search" placeholder="Search..." autofocus="autofocus">-->
+<!--    </form>-->
+<!--    <div class="flickr_pagination">-->
+      <%#= will_paginate @person, :container => false %>
+<!--    </div>-->
+<!--    <table class="table">-->
+<!--      <thead>-->
+<!--       <tr>-->
+<!--         <th><%#= sortable "first_name" %></th>-->
+<!--         <th><%#= sortable "last_name" %></th>-->
+<!--         <th><%#= sortable "gender" %></th>-->
+<!--         <th><%#= sortable "weapon" %></th>-->
+<!--         <th><%#= sortable "vehicle" %></th>-->
+<!--         <th><%#= sortable "species" %></th>-->
+<!--       </tr>-->
+<!--      </thead>-->
+<!--      <tbody>-->
 
-      <% if @person!=nil %>
-        <% @person.each do |row| %>
-          <tr>
-            <td><%=row.first_name%></td>
-            <td><%=row.last_name%></td>
-            <td><%=row.gender%></td>
-            <td><%=row.weapon%></td>
-            <td><%=row.vehicle%></td>
-            <td><%=row.species%></td>
-          </tr>
-        <% end %>
-      <% end %>
-      </tbody>
-    </table>
-    <div class="flickr_pagination">
-      <%= will_paginate @person, :container => false %>
-    </div>
-  </div>
+      <%# if @person!=nil %>
+        <%# @person.each do |row| %>
+<!--          <tr>-->
+<!--            <td><%#=row.first_name%></td>-->
+<!--            <td><%#=row.last_name%></td>-->
+<!--            <td><%#=row.gender%></td>-->
+<!--            <td><%#=row.weapon%></td>-->
+<!--            <td><%#=row.vehicle%></td>-->
+<!--            <td><%#=row.species%></td>-->
+<!--          </tr>-->
+        <%# end %>
+      <%# end %>
+<!--      </tbody>-->
+<!--    </table>-->
+<!--    <div class="flickr_pagination">-->
+      <%#= will_paginate @person, :container => false %>
+<!--    </div>-->
+<!--  </div>-->
 </div>
 <script>
     $(document).on("keyup", "#search", function(e) {

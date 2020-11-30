@@ -68,11 +68,11 @@ class PageController < ApplicationController
         @location = createLocation(row["Location"], @person)
         @affiliation = createAffiliation(row["Affiliations"], @person)
       end
-      redirect_to root_path, notice: "Successfully import file to database!"
+      redirect_to people_path, notice: "Successfully import file to database!"
 
     else
       logger.error "Bad file_data: #{file_data.class.name}: #{file_data.inspect}"
-      redirect_to root_path, alert: "File Invalid"
+      redirect_to people_path, alert: "File Invalid"
     end
 
   end
